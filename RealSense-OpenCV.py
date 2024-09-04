@@ -60,8 +60,8 @@ while True:
             x, y, w, h = cv2.boundingRect(mask_contour)
             cv2.rectangle(color_image, (x, y), (x + w, y + h), (0, 0, 255), 3)
             depth_calibration = depth_image.get_distance(cX, cY)
-            depth = predictScales.get_depth(depth_calibration)
-            area = predictScale.get_area(mask_contour)
+            depth = predictScales.get_scale_depth(depth_calibration)
+            area = predictScale.get_scale_area(mask_contour)
             volume = depth * area
             print(f"\rVolume:{volume}", end="")
 
