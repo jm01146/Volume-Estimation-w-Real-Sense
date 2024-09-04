@@ -17,6 +17,7 @@ class ScalePxDimensions():
     self.depth_intercept = None
     self.data_fitting_area()
     self.data_fitting_depth()
+    
 
   def data_fitting_area(self):
     area_PX = []
@@ -36,7 +37,9 @@ class ScalePxDimensions():
       
     self.area_slope = (((mean(area_distance) * mean(area_scale)) - mean(area_distance * area_scale)) / ((mean(area_distance) * mean(area_distance)) - mean(area_distance * area_distance)))
     self.area_intercept = mean(area_scale) - self.area_slope * mean(area_distance)
+    
     return self.area_slope, self.area_intercept
+    
 
   def data_fitting_depth(self):
     depth_PX = []
@@ -56,12 +59,17 @@ class ScalePxDimensions():
       
     self.depth_slope = (((mean(depth_distance) * mean(depth_scale)) - mean(depth_distance * depth_scale)) / ((mean(depth_distance) * mean(depth_distance)) - mean(depth_distance * depth_distance)))
     self.depth_intercept = mean(depth_scale) - self.depth_slope * mean(depth_distance)
+    
     return self.depth_slope, self.depth_intercept
 
+  
   def get_scale_area(self, area):
     fitted_area = (self.area_slope * area) + self.area_intercept
+    
     return fitted_area
 
+  
   def get_scale_depth(self, depth):
     fitted_depth = (self.depth_slope * depth) + self.depth_intercept
+    
     return fitted_depth
