@@ -24,8 +24,8 @@ class ScalePxDimensions():
     area_scale = []
     area_distance = []
     
-    for PX_measurement in area_data['A']:
-      area_PX.append(PX_measurement.value)
+    for pixel_measurement in area_data['A']:
+      area_PX.append(pixel_measurement.value)
     for millimeters_measurement in area_data['B']:
       area_MM.append(millimeters_measurement.value)
     for distance_measurment in area_data['C']:
@@ -44,8 +44,8 @@ class ScalePxDimensions():
     depth_scale = []
     depth_distance = []
     
-    for PX_measurement in depth_data['A']:
-      depth_PX.append(PX_measurement.value)
+    for pixel_measurement in depth_data['A']:
+      depth_PX.append(pixel_measurement.value)
     for millimeters_measurement in depth_data['B']:
       depth_MM.append(millimeters_measurement.value)
     for distance_measurment in depth_data['C']:
