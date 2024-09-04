@@ -17,10 +17,11 @@ class ScalePxDimensions():
     self.depth_intercept = None
     self.fitted_area = None
     self.fitted_depth = None
+    self.area_input = None
+    self.depth_input = None
     self.data_fitting_area()
     self.data_fitting_depth()
     
-
   def data_fitting_area(self):
     area_PX = []
     area_MM = []
@@ -33,16 +34,14 @@ class ScalePxDimensions():
       area_MM.append(millimeters_measurement.value)
     for distance_measurment in area_data['C']:
       area_distance.append(distance_measurement.value)
-
+      
     for pixel, millimeters in zip(area_PX, area_MM)
       area_scale.append(pixel/millimeters)
       
     self.area_slope = (((mean(area_distance) * mean(area_scale)) - mean(area_distance * area_scale)) / ((mean(area_distance) * mean(area_distance)) - mean(area_distance * area_distance)))
     self.area_intercept = mean(area_scale) - self.area_slope * mean(area_distance)
-    
     return self.area_slope, self.area_intercept
     
-
   def data_fitting_depth(self):
     depth_PX = []
     depth_MM = []
@@ -55,20 +54,20 @@ class ScalePxDimensions():
       depth_MM.append(millimeters_measurement.value)
     for distance_measurment in depth_data['C']:
       depth_distance.append(distance_measurement.value)
-
+      
     for pixel, millimeters in zip(depth_PX, depth_MM)
       depth_scale.append(pixel/millimeters)
       
     self.depth_slope = (((mean(depth_distance) * mean(depth_scale)) - mean(depth_distance * depth_scale)) / ((mean(depth_distance) * mean(depth_distance)) - mean(depth_distance * depth_distance)))
     self.depth_intercept = mean(depth_scale) - self.depth_slope * mean(depth_distance)
     return self.depth_slope, self.depth_intercept
-
-  
+    
   def get_scale_area(self, area):
-    self.fitted_area = (self.area_slope * area) + self.area_intercept
+    self.area_input = area
+    self.fitted_area = (self.area_slope * self.area_input) + self.area_intercept
     return self.fitted_area
-
   
   def get_scale_depth(self, depth):
-    self.fitted_depth = (self.depth_slope * depth) + self.depth_intercept
+    self.depth_input = depth
+    self.fitted_depth = (self.depth_slope * self.depth_input) + self.depth_intercept
     return self.fitted_depth
