@@ -1,4 +1,4 @@
-import PredictScales import ScalePxDimensions
+from PredictScales import ScalePxDimensions
 import pyrealsense2 as rs
 import numpy as np
 import cv2
