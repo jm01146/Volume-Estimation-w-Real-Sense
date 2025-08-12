@@ -5,7 +5,7 @@ import cv2
 
 ctx = rs.context()
 rs_device = []
-for reItems in ctx.devices:
+for rsItems in ctx.devices:
   rs_device.append(rsItems.get_info(rs.camera_info.serial_number))
 
 cam_1 = rs.pipeline()
@@ -34,7 +34,7 @@ predictScales = ScalePxDimension()
 
 # Accesses camera and finds the targeted color and displays it
 while True:
-  ret, frame = cam_1.wait_for_frames()
+  frame = cam_1.wait_for_frames()
   color_frame = frame.get_color_frame()
   color_image = np.asanarray(color_frame.get_data())
   depth_frame = frame.get_depth_frame()
@@ -49,7 +49,7 @@ while True:
   results = frame.copy()
   results = cv2.drawContours(results, mask_contours, -1, (0, 0, 255), 3)
 
-    # crates a box around the targeted color
+  # crates a box around the targeted color
   if len(mask_contours) != 0:
       for mask_contour in mask_contours:
           if cv2.contourArea(mask_contour) > 1500:
@@ -77,7 +77,6 @@ while True:
         break
 
 # Allows to release the picture to free used system resources #
-cap.release()
-cv2.destroyAllWindows()
 cam_1.stop()
 cam_2.stop()
+cv2.destroyAllWindows()
